@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Henry's To-Do List</title>
+    <style>
+        form {
+            text-align: center;
+        }
+        ul{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form action="/" method="post">
+        <input type="text" name="item" placeholder="請輸入待辦事項">
+        <button type="submit">加入待辦清單</button>
+    </form>
+    <ul>
+        {% for item in items %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
