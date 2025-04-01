@@ -1,0 +1,254 @@
+/* -------------------------
+   全域設定
+------------------------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans TC", sans-serif;
+    text-align: center; /* 主要讓頂部容器置中 */
+    background: url("./images/background-image.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* -------------------------
+   頂部容器：輸入框 & 按鈕
+------------------------- */
+.header-container {
+    margin-top: 100px;          /* 頂部空間 100px */
+    display: inline-flex;       /* 讓兩個表單並排 */
+    gap: 20px;                  /* 表單間距 */
+    justify-content: center;
+    align-items: center;
+}
+
+/* 新增待辦的表單 */
+.add-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 清除待辦的表單 */
+.clear-form {
+    display: flex;
+    align-items: center;
+}
+
+/* 只針對文字輸入框的樣式 (避免影響 checkbox) */
+input[type="text"] {
+    width: 400px;
+    padding: 10px;
+    font-size: 18px;
+    color: #000;
+    background-color: #fff;
+    border: 4px solid #000;
+    border-radius: 0;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 8px 8px 0 #000;
+}
+
+input[type="text"]::placeholder {
+    color: #888;
+}
+
+input[type="text"]:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0 #000;
+}
+
+input[type="text"]:focus {
+    background-color: #000;
+    color: #fff;
+    border-color: #fff;
+}
+
+input[type="text"]:focus::placeholder {
+    color: #fff;
+}
+
+/* -------------------------
+   按鈕樣式
+------------------------- */
+button {
+    padding: 10px 15px;
+    margin-top: 15px;
+    margin-left: 10px;
+    background-color: #000;
+    outline: 3px #000 solid;
+    outline-offset: -3px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 400ms;
+    color: #fff; /* 預設文字顏色 */
+    font-weight: 700;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: transparent;
+    color: #fff;
+}
+
+/* -------------------------
+   待辦清單樣式
+------------------------- */
+.todo-list {
+    margin: 40px auto;          /* 上下留空，水平置中 */
+    width: 50%;                 /* 或 max-width: 600px; */
+    min-height: 100px;          /* 至少 100px 高 */
+    padding: 20px;
+    text-align: left;           /* 文字靠左對齊 */
+    background-color: #fff;
+    border: 4px solid #000;
+    box-shadow: 8px 8px 0 #000;
+    list-style-type: none;      /* 移除預設清單符號 */
+}
+
+/* 調整每個待辦項目：左右分佈 */
+.todo-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  /* 左右自動拉開 */
+    margin-bottom: 10px;
+    font-size: 20px; 
+}
+
+/* 左側容器：包含 checkbox 與文字 */
+.item-left {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* 讓待辦項目的文字與 checkbox 同行 */
+.todo-text {
+    margin-left: 10px;
+}
+
+/* 刪除按鈕表單與按鈕 */
+.delete-form {
+    display: inline-block;
+}
+
+.delete-btn {
+    padding: 5px 10px;
+    background-color: #e74c3c; /* 紅色背景 */
+    border: none;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+/* -------------------------
+   調整每個待辦項目表單排列：使 checkbox 與文字同排
+------------------------- */
+.toggle-form {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* -------------------------
+   自訂 Checkbox Switch 橙色主題
+------------------------- */
+.checkbox-wrapper-55 .check {
+    --size: 40px;
+
+    position: relative;
+    background: linear-gradient(90deg, #ff8c00, #ffa500); /* 橙色漸變 */
+    line-height: 0;
+    perspective: 400px;
+    font-size: var(--size);
+}
+
+.checkbox-wrapper-55 .check input[type="checkbox"],
+.checkbox-wrapper-55 .check label,
+.checkbox-wrapper-55 .check label::before,
+.checkbox-wrapper-55 .check label::after,
+.checkbox-wrapper-55 .check {
+    appearance: none;
+    display: inline-block;
+    border-radius: var(--size);
+    border: 0;
+    transition: .35s ease-in-out;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.checkbox-wrapper-55 .check label {
+    width: calc(2.2 * var(--size));
+    height: var(--size);
+    background: #d7d7d7;
+    overflow: hidden;
+}
+
+.checkbox-wrapper-55 .check input[type="checkbox"] {
+    position: absolute;
+    z-index: 1;
+    width: calc(.8 * var(--size));
+    height: calc(.8 * var(--size));
+    top: calc(.1 * var(--size));
+    left: calc(.1 * var(--size));
+    background: linear-gradient(45deg, #dedede, #ffffff);
+    box-shadow: 0 6px 7px rgba(0,0,0,0.3);
+    outline: none;
+    margin: 0;
+}
+
+.checkbox-wrapper-55 .check input[type="checkbox"]:checked {
+    left: calc(1.3 * var(--size));
+}
+
+.checkbox-wrapper-55 .check input[type="checkbox"]:checked + label {
+    background: transparent;
+}
+
+.checkbox-wrapper-55 .check label::before,
+.checkbox-wrapper-55 .check label::after {
+    content: "· ·";
+    position: absolute;
+    overflow: hidden;
+    left: calc(.15 * var(--size));
+    top: calc(.5 * var(--size));
+    height: var(--size);
+    letter-spacing: calc(-0.04 * var(--size));
+    color: #9b9b9b;
+    font-family: "Times New Roman", serif;
+    z-index: 2;
+    font-size: calc(.6 * var(--size));
+    border-radius: 0;
+    transform-origin: 0 0 calc(-0.5 * var(--size));
+    backface-visibility: hidden;
+}
+
+.checkbox-wrapper-55 .check label::after {
+    content: "●";
+    top: calc(.65 * var(--size));
+    left: calc(.2 * var(--size));
+    height: calc(.1 * var(--size));
+    width: calc(.35 * var(--size));
+    font-size: calc(.2 * var(--size));
+    transform-origin: 0 0 calc(-0.4 * var(--size));
+}
+
+.checkbox-wrapper-55 .check input[type="checkbox"]:checked + label::before,
+.checkbox-wrapper-55 .check input[type="checkbox"]:checked + label::after {
+    left: calc(1.55 * var(--size));
+    top: calc(.4 * var(--size));
+    line-height: calc(.1 * var(--size));
+    transform: rotateY(360deg);
+}
+
+.checkbox-wrapper-55 .check input[type="checkbox"]:checked + label::after {
+    height: calc(.16 * var(--size));
+    top: calc(.55 * var(--size));
+    left: calc(1.6 * var(--size));
+    font-size: calc(.6 * var(--size));
+    line-height: 0;
+}

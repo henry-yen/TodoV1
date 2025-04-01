@@ -1,9 +1,4 @@
-from flask import Flask
+from app import app
 
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print("Jello")
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    app.run(port=52000)

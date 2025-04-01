@@ -1,26 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Henry's To-Do List</title>
-    <style>
-        form {
-            text-align: center;
-        }
-        ul{
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Henry's To-Do List</title>
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+  
+  <!-- 連結到你的 styles.css -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <form action="/" method="post">
-        <input type="text" name="item" placeholder="請輸入待辦事項">
-        <button type="submit">加入待辦清單</button>
+  <!-- 頂部容器，包含輸入框、加入按鈕、清除按鈕 -->
+  <div class="header-container">
+    <form action="/add" method="post" class="add-form">
+      <input type="text" name="item" placeholder="請輸入待辦事項">
+      <button type="submit">
+        <span class="text">加入待辦清單</span>
+      </button>
     </form>
-    <ul>
-        {% for item in items %}
-        <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
+    <form action="/clear" method="post" class="clear-form">
+      <button type="submit">
+        <span class="clear-text">清除待辦清單</span>
+      </button>
+    </form>
+  </div>
+
+  <!-- 待辦清單 -->
+  <ul class="todo-list">
+    {% for item in items %}
+    <li>
+      <!-- 左側：包含 toggle 表單與待辦項目文字 -->
+      <div class="item-left">
+        <form action="/toggle" method="post" class="toggle-form">
+          <!-- hidden input 確保 index 送出 -->
+          <input type="hidden" name="index" value="{{ loop.index0 }}">
+          <div class="checkbox-wrapper-55">
+            <div class="check">
+              <input type="checkbox" id="item-{{ loop.index0 }}" {% if item.checked %}checked{% endif %} onchange="this.form.submit()">
+              <label for="item-{{ loop.index0 }}"></label>
+            </div>
+          </div>
+        </form>
+        <span class="todo-text">{{ item.text }}</span>
+      </div>
+      <!-- 右側：刪除按鈕 -->
+      <form action="/delete" method="post" class="delete-form">
+        <input type="hidden" name="index" value="{{ loop.index0 }}">
+        <button type="submit" class="delete-btn">刪除</button>
+      </form>
+    </li>
+    {% endfor %}
+  </ul>
 </body>
 </html>
